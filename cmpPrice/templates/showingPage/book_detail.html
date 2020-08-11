@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    price cmp details
+{% endblock title %}
+{% block content %}
+
+<p></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="{{imgs}}" alt="no pic" height="200" width="200"><br>
+        <br>
+        <p><b>{{name}}</b></p>
+        <p><b>ISBN </b><span>{{ISBN}}</span></p>
+        <p><b>{{author}}</b></p>
+        <p><b>{{publisher}}</b></p>
+        <p>{{abstract}}</p>
+    </div>
+    <div class="col">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th scope="col">Sold by</th>
+                <th scope="col">Price</th>
+                <th scope="col">Comment</th>
+                <th scope="col">Rate</th>
+                <th scope="col">shopping link?</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for good in result%}
+            <tr>
+                <td style="vertical-align: middle !important;text-align: center;">{{good.good_from}}</td>
+                <td style="vertical-align: middle !important;text-align: center;">{{good.good_price_unit}}{{good.good_price}}</td>
+                <td style="vertical-align: middle !important;text-align: center;">{{good.good_num_comment}}</td>
+                <td style="vertical-align: middle !important;text-align: center;">{{good.good_comment_rate}}</td>
+                <td style="vertical-align: middle !important;text-align: center;"><a href="{{good.good_url}}">want to buy?</a><br></td>
+            </tr>
+          {%endfor%}
+          </tbody>
+        </table>
+    </div>
+
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    choose goods
+{% endblock title %}
+{% block content %}
+
+<div class="">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'showingPage:home' %}" method="POST">
+          {%csrf_token%}
+            <input type="search"
+                class="form-control mr-sm-2"
+                name="search"
+                placeholder="search..."
+                required
+            >
+            <input type="search"
+                class="form-control mr-sm-2"
+                name="number"
+                placeholder="Qty searching..."
+                required
+            >
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+
+<div class="row">
+        <div class="col">
+            <h5>The most <b><em>popular</em></b> from JD</h5>
+            <div>
+    {% for good in JD_goodslist%}
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{good.good_pic}}" alt="no pic" class="img-thumbnail">
+        </div>
+        <div class="col-sm-8">
+            <a href="{{good.good_url}}">{{good.good_name}}</a><br>
+            <em>ISBN </em><a href="{% url 'showingPage:cmpPrice' good.good_ISBN %}">{{good.good_ISBN}}</a><br>
+            <em>Price </em><span style="color:red;">{{good.good_price_unit}}{{good.good_price}}</span><br>
+            <em>Comment </em><span style="color:green;">{{good.good_num_comment}}</span><br>
+            <em>Rate </em><span style="color:green;">{{good.good_comment_rate}}</span><br>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+        </div>
+        <div class="col">
+            <h5>The most <b><em>popular</em></b> from taobao</h5>
+            <div>
+                {% for good in TB_goodslist%}
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="{{good.good_pic}}" alt="no pic" class="img-thumbnail">
+                    </div>
+                    <div class="col-sm-8">
+                        <a href="{{good.good_url}}">{{good.good_name}}</a><br>
+                        <em>ISBN </em><a href="{% url 'showingPage:cmpPrice' good.good_ISBN %}">{{good.good_ISBN}}</a><br>
+                        <em>Price </em><span style="color:red;">￥{{good.good_price}}</span><br>
+                        <em>Comment </em><span style="color:green;">{{good.good_num_comment}}</span><br>
+                        <em>Rate </em><span style="color:green;">{{good.good_comment_rate}}</span><br>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
+            </div>
+        </div>
+</div>
+{% endblock content %}
